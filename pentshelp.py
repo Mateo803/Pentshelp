@@ -1,6 +1,8 @@
 import argparse
 import src.enumeration
 import src.vuln_detection
+import src.exploitation
+import src.postexploitation
 
 
 def main():
@@ -23,6 +25,18 @@ def main():
     #Vulnerabilities detection options
 
     parser.add_argument("--vulnerabilities",help="Detect possible vulnerabilities on the selected target")
+
+
+
+
+    #Exploitation options
+
+    parser.add_argument("-u","--upload_exploit",help="Uploads an exploit to the target machine", nargs=2)
+
+
+    #Postexploitation option
+
+    parser.add_argument("--pe",help="Try to detect vulnerability to privilege escalation")
 
 
     #Another options
@@ -65,12 +79,14 @@ def main():
         src.vuln_detection.detect_vulnerabilities(args.vulnerabilities[0], args.output)
 
 
+    elif args.upload_exploit is not None:
+
+        src.exploitation.upload_exploit(args.upload_exploit[0], args.upload_exploit[1])  
 
 
+    elif args.postexploitation is not None:
 
-
-
-
+        src.vuln_detection.privesc(args.vulnerabilities[0])    
 
 
 
@@ -81,11 +97,6 @@ def main():
 
 
         
-
-
-
-
-
 
 
 if __name__ == "__main__":
