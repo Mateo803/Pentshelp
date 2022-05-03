@@ -28,11 +28,10 @@ First execute install_requeriments.sh
 ```sh
 chmod +x install_requeriments.sh
 ./requeriments.sh
-node app
 ```
 
 Now simply execute pentshelp.py with python3
 
-```sh
+```
 python3 pentshelp.py option argument
 ```
