@@ -85,14 +85,6 @@ def retrieve_cve_data(cve):
 
 def report_cve(cve):
 
-	db = mysql.connector.connect(
-  host="localhost",
-  user="pensthelp",
-  password="Pentshelp_passw0rd",
-  database="pensthelp"
-)
-
-	cursor = db.cursor()
 
 	cve_data = retrieve_cve_data(cve)
 
@@ -102,6 +94,24 @@ def report_cve(cve):
 
 		return
 
+	try:
+
+		db = mysql.connector.connect(
+	  host="localhost",
+	  user="pensthelp",
+	  password="Pentshelp_passw0rd",
+	  database="pensthelp"
+	)
+
+	except:
+
+		print('The database is not well configured')
+
+		return
+
+	cursor = db.cursor()
+
+	
 	sql = "INSERT INTO CVE (ID,Name,Date,Score,Kind_of_vulnerability,Vulnerable_products) VALUES (%s,%s,%s,%s,%s,%s)"
 
 	val = (cve_data["id"], cve_data["name"],cve_data["date"],cve_data["score"],cve_data["kind_of_vulnerability"],cve_data["vulnerable_products"])
