@@ -115,9 +115,3 @@ def report_cve(cve):
 	except:
 
 		print('The CVE has already been reported')
-
-
-
-report_cve("CVE-2010-3333")
-
-#retrieve_cve_data("CVE-2010-3333")
