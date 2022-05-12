@@ -3,6 +3,7 @@ import src.enumeration
 import src.vuln_detection
 import src.exploitation
 import src.postexploitation
+import src.reporting
 
 
 def main():
@@ -36,8 +37,12 @@ def main():
 
     #Postexploitation option
 
-    parser.add_argument("--pe",help="Try to detect vulnerability to privilege escalation")
+    parser.add_argument("--pe",help="Detects vulnerabilities related to privilege scalation")
 
+
+    #Reporting option
+
+    parser.add_argument("-r","--report",help="Reports a vulnerability (CVE)")
 
     #Another options
 
@@ -84,11 +89,14 @@ def main():
         src.exploitation.upload_exploit(args.upload_exploit[0], args.upload_exploit[1])  
 
 
-    elif args.postexploitation is not None:
+    elif args.pe is not None:
 
-        src.vuln_detection.privesc(args.vulnerabilities[0])    
+        src.postexploitation.privesc(args.pe[0]) 
 
 
+    elif args.report is not None:
+
+        src.reporting.report_cve(args.report[0])     
 
 
     else:
@@ -97,9 +105,6 @@ def main():
 
 
         
-
-
 if __name__ == "__main__":
 
     main()
-
