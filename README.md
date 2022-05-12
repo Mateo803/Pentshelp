@@ -35,3 +35,13 @@ Now simply execute pentshelp.py with python3
 ```
 python3 pentshelp.py option argument
 ```
+
+## Configuring MySQL (reporting)
+
+In order to use the reporting funcionality, you need to follow these steps:
+
+- Install MySQL
+- Create an user named pentshelp with password Pentshelp_passw0rd
+- Create a database named pentshelp
+- In this database copy and run cve.py (which is in src folder). This will create the CVE table
+- The host is localhost
