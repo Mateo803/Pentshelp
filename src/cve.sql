@@ -1,4 +1,4 @@
-CREATE TABLE CVE (
+CREATE TABLE CVES (
 
 ID VARCHAR(20),
 
@@ -12,4 +12,4 @@ Kind_of_vulnerability VARCHAR(500),
 
 Vulnerable_products VARCHAR(500)
 
-)
+);
