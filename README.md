@@ -41,7 +41,36 @@ python3 pentshelp.py option argument
 In order to use the reporting funcionality, you need to follow these steps:
 
 - Install MySQL
-- Create an user named pentshelp with password Pentshelp_passw0rd
-- Create a database named pentshelp
-- In this database copy and run cve.py (which is in src folder). This will create the CVE table
-- The host is localhost
+- Create a user named Pentshelp with a strong password (hostname is localhost).
+Note:  Remember to insert the password into the reporting.py script in order to connect to the database.
+- Create a database named pentshelp and insert into it the CVES table (whose code is in src/cves.sql file)
+- Finally, grant all privileges to the user Pentshelp on the CVES table
+
+
+The following code does the above (assuming the program is installed and you are the root user):
+
+create database pentshelp;
+
+use pentshelp;
+
+CREATE TABLE CVES (
+
+ID VARCHAR(20),
+
+Name VARCHAR(500),
+
+Date DATE,
+
+Score DECIMAL(3,2),
+
+Kind_of_vulnerability VARCHAR(500),
+
+Vulnerable_products VARCHAR(500)
+
+);
+
+create user 'Pentshelp'@'localhost' identified by 'strong_password';
+
+grant all privileges on Pentshelp.CVES to 'Pentshelp'@'localhost';
+
+flush privileges;
