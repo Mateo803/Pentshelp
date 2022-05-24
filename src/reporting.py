@@ -98,9 +98,9 @@ def report_cve(cve):
 
 		db = mysql.connector.connect(
 	  host="localhost",
-	  user="pensthelp",
-	  password="Pentshelp_passw0rd",
-	  database="pensthelp"
+	  user="pentshelp",
+	  password="*Zq%GPG@Vn$BzjC*h8Ma6^VWpL*^85",
+	  database="pentshelp"
 	)
 
 	except:
@@ -112,7 +112,7 @@ def report_cve(cve):
 	cursor = db.cursor()
 
 	
-	sql = "INSERT INTO CVE (ID,Name,Date,Score,Kind_of_vulnerability,Vulnerable_products) VALUES (%s,%s,%s,%s,%s,%s)"
+	sql = "INSERT INTO CVES (ID,Name,Date,Score,Kind_of_vulnerability,Vulnerable_products) VALUES (%s,%s,%s,%s,%s,%s)"
 
 	val = (cve_data["id"], cve_data["name"],cve_data["date"],cve_data["score"],cve_data["kind_of_vulnerability"],cve_data["vulnerable_products"])
 
@@ -125,3 +125,7 @@ def report_cve(cve):
 	except:
 
 		print('The CVE has already been reported')
+
+	else:
+
+		print('CVE reported successfully')
