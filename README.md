@@ -55,7 +55,7 @@ use pentshelp;
 
 CREATE TABLE CVES (
 
-ID VARCHAR(20),
+ID VARCHAR(20) PRIMARY KEY,
 
 Name VARCHAR(500),
 
