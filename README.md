@@ -71,6 +71,6 @@ Vulnerable_products VARCHAR(500)
 
 create user 'Pentshelp'@'localhost' identified by 'strong_password';
 
-grant all privileges on Pentshelp.CVES to 'Pentshelp'@'localhost';
+grant all privileges on pentshelp.CVES to 'Pentshelp'@'localhost';
 
 flush privileges;
