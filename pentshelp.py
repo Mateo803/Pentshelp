@@ -96,7 +96,7 @@ def main():
 
     elif args.report is not None:
 
-        src.reporting.report_cve(args.report[0])     
+        src.reporting.report_cve(args.report)     
 
 
     else:
