@@ -40,9 +40,15 @@ def main():
     parser.add_argument("--pe",help="Detects vulnerabilities related to privilege scalation")
 
 
-    #Reporting option
+    #Reporting options
 
-    parser.add_argument("-r","--report",help="Reports a vulnerability (CVE)")
+    parser.add_argument("-r","--report",help="Reports a vulnerability (CVE) with an optional solution read from a text file (argument -s or --solution)")
+
+    parser.add_argument("-s","--solution", help="Text file with a solution to a specific vulnerability ")
+
+    parser.add_argument("-d","--delete_cve",help="Removes a vulnerability from the database")
+
+    parser.add_argument("-g","--generate_report",help="Generates the report with all the vulnerabilities previosly registred")
 
     #Another options
 
@@ -55,8 +61,6 @@ def main():
     args = parser.parse_args()
 
 
-
-    #Parsing enumeration options
 
     if args.ports is not None:
         
@@ -73,7 +77,7 @@ def main():
 
     elif args.subdomains is not None:
 
-        src.enumeration.detect_subdomains(args.subdomains[0],args.directories[1],args.output)
+        src.enumeration.detect_subdomains(args.subdomains[0],args.subdomains[1],args.output)
 
     elif args.add_host is not None:
 
@@ -81,7 +85,7 @@ def main():
 
     elif args.vulnerabilities is not None: #TODO
 
-        src.vuln_detection.detect_vulnerabilities(args.vulnerabilities[0], args.output)
+        src.vuln_detection.detect_vulnerabilities(args.vulnerabilities, args.output)
 
 
     elif args.upload_exploit is not None:
@@ -91,12 +95,22 @@ def main():
 
     elif args.pe is not None:
 
-        src.postexploitation.privesc(args.pe[0]) 
+        src.postexploitation.privesc(args.pe) 
 
 
     elif args.report is not None:
 
-        src.reporting.report_cve(args.report)     
+        src.reporting.report_cve(args.report, args.solution)
+
+
+    elif args.generate_report is not None:
+
+        src.reporting.generate_report(args.generate_report)
+
+
+    elif args.delete_cve is not None:
+
+        src.reporting.delete_cve(args.delete_cve)
 
 
     else:
