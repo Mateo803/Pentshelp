@@ -9,3 +9,7 @@ sudo apt-get install gobuster -y
 && pip install argparse
 
 && pip install mysql-connector
+
+&& pip install reportlab
+
+&& pip install matplotlib
