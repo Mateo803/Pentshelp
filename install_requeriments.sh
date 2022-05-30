@@ -6,4 +6,4 @@ sudo apt-get install nmap -y &&
 
 sudo apt-get install gobuster -y;
 
-pip install argparse mysql-connector reportlab matplotlib
+pip install argparse mysql-connector-python reportlab matplotlib
