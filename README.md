@@ -23,11 +23,12 @@ Pentesting semi-automatic tool which eases this process through distinct type of
 
 ## Installation
 
-First execute install_requeriments.sh
+First execute install_requeriments.sh and create_pentesting_folders.sh
 
 ```sh
-chmod +x install_requeriments.sh
+chmod +x install_requeriments.sh create_pentesting_folders.sh
 ./requeriments.sh
+./create_pentesting_folders.sh
 ```
 
 Now simply execute pentshelp.py with python3
