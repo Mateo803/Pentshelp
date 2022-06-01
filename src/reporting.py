@@ -3,6 +3,7 @@ from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
 import mysql.connector
 import matplotlib.pyplot as plot
+from os import path
 
 
 def retrieve_cve_data(cve):
@@ -246,7 +247,14 @@ def generate_report(report_name):
 
 	impacts = []
 
-	report = canvas.Canvas(report_name)
+	if not path.exists('pentesting_files'):
+
+		print('\nYou need to create the pentshelp folders first')
+
+		return
+
+
+	report = canvas.Canvas('pentesting_files/reports/'+report_name)
 
 	for cve in cves:
 
