@@ -7,30 +7,24 @@ from os import path
 def detect_vulnerabilities(target, output):
 
 
-    if output is None:
+    if output is False:
 
 
-        vulnerabilities = subprocess.Popen(['nmap', '--script', 'nmap-vulners','-sV',target,], stdout=subprocess.PIPE)
+        vulnerabilities = subprocess.Popen(['nmap', '-sV', '--script','vulners',target], stdout=None)
 
-        subprocess.run(['grep', 'CVE'], stdin=vulnerabilidades.stdout, stdout=None)
-
-
+        
     else:
 
+        if path.exists('pentesting_files'):
 
-        file = open(output,'w')
 
-        subprocess.Popen(['nmap', '--script', 'nmap-vulners','-sV',target,], stdout=None)
-        
+            file = open('pentesting_files/vulnerabilities/cves.txt','w')
 
-        subprocess.run(['grep', 'http'], stdin=vulnerabilities.stdout, stdout=file)
+            vulnerabilities = subprocess.Popen(['nmap', '-sV', '--script','vulners',target], stdout=file)
         
-        
-        if path.exists(output):
-               
-            print('File created successfully');
-            
+            print('\nFile created successfully in pentesting_files/vulnerabilities/cves.txt')
+
+
         else:
             
-            print('An error ocurred while creating the file')
-
+            print('\nYou need to create the pentshelp folders first')
