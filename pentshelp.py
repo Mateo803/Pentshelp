@@ -52,7 +52,7 @@ def main():
 
     #Another options
 
-    parser.add_argument("-o","--output", help="If none file is specified, the output is the console")
+    parser.add_argument("-o","--output", action="store_true", help="If this flag is not set, the output is the console")
 
     parser.add_argument("-v","--version", action="version", version="Pentshelp 1.0")
 
