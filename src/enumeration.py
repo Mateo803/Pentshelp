@@ -9,9 +9,9 @@ def detect_ports(target, output):
         
             print('\nOpened ports:\n')
 
-            puertos_abiertos = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
+            open_ports = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
                     
-            subprocess.run(['grep', 'open'], stdin=puertos_abiertos.stdout, stdout=None)
+            subprocess.run(['grep', 'open'], stdin=open_ports.stdout, stdout=None)
             
            
         else:
@@ -21,9 +21,9 @@ def detect_ports(target, output):
 
                 file = open('pentesting_files/enumeration/open_ports.txt','w')
 
-                puertos_abiertos = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
+                open_ports = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
                 
-                subprocess.run(['grep', 'open'], stdin=puertos_abiertos.stdout, stdout=file)
+                subprocess.run(['grep', 'open'], stdin=open_ports.stdout, stdout=file)
             
                 print('\nFile created successfully in pentesting_files/enumeration/open_ports.txt');
                 
