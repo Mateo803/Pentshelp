@@ -1,8 +1,5 @@
 import subprocess
 
-from os import path
-
-
 
 def detect_vulnerabilities(target, output):
 
