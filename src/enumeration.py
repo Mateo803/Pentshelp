@@ -16,22 +16,15 @@ def detect_ports(target, output):
            
         else:
 
-            if path.exists('pentesting_files'):
+    
+            file = open('pentesting_files/enumeration/open_ports.txt','w')
 
-
-                file = open('pentesting_files/enumeration/open_ports.txt','w')
-
-                open_ports = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
-                
-                subprocess.run(['grep', 'open'], stdin=open_ports.stdout, stdout=file)
+            open_ports = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
             
-                print('\nFile created successfully in pentesting_files/enumeration/open_ports.txt');
+            subprocess.run(['grep', 'open'], stdin=open_ports.stdout, stdout=file)
+        
+            print('\nFile created successfully in pentesting_files/enumeration/open_ports.txt');
                 
-
-            else:
-                
-                print('\nYou need to create the pentshelp folders first')
-
 
 
 def detect_os(target, output):
@@ -45,22 +38,15 @@ def detect_os(target, output):
             
     else:
 
-        if path.exists('pentesting_files'):
-
-
-            file = open('pentesting_files/enumeration/os.txt','w')
-
-            operating_system = subprocess.Popen(['sudo', 'nmap', '-O', target], stdout=subprocess.PIPE)
-
-            subprocess.run(['grep', 'OS details'], stdin=operating_system.stdout, stdout=file)
         
-            print('\nFile created successfully in pentesting_files/enumeration/os.txt');
-            
+        file = open('pentesting_files/enumeration/os.txt','w')
 
-        else:
-            
-            print('\nYou need to create the pentshelp folders first')
+        operating_system = subprocess.Popen(['sudo', 'nmap', '-O', target], stdout=subprocess.PIPE)
 
+        subprocess.run(['grep', 'OS details'], stdin=operating_system.stdout, stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/enumeration/os.txt');
+            
 
 def detect_directories(target, wordlist, output):
 
@@ -71,22 +57,15 @@ def detect_directories(target, wordlist, output):
 
     else:
 
-        if path.exists('pentesting_files'):
+       
+        file = open('pentesting_files/enumeration/directories.txt','w')
 
+        directories = subprocess.Popen(['gobuster','dir','-u',target,'-w',wordlist], stdout=None)
 
-            file = open('pentesting_files/enumeration/directories.txt','w')
-
-            directories = subprocess.Popen(['gobuster','dir','-u',target,'-w',wordlist], stdout=None)
-
-            subprocess.run(['grep', 'http'], stdin=directories.stdout, stdout=file)
-        
-            print('\nFile created successfully in pentesting_files/enumeration/directories.txt');
+        subprocess.run(['grep', 'http'], stdin=directories.stdout, stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/enumeration/directories.txt');
             
-
-        else:
-            
-            print('\nYou need to create the pentshelp folders first')
-
 
 
 def detect_subdomains(target, wordlist, output):
@@ -98,22 +77,14 @@ def detect_subdomains(target, wordlist, output):
 
     else:
 
-        if path.exists('pentesting_files'):
+        file = open('pentesting_files/enumeration/subdomains.txt','w')
 
+        directories = subprocess.Popen(['gobuster','dir','-d',target,'-w',wordlist], stdout=None)
 
-            file = open('pentesting_files/enumeration/subdomains.txt','w')
-
-            directories = subprocess.Popen(['gobuster','dir','-d',target,'-w',wordlist], stdout=None)
-
-            subprocess.run(['grep', 'http'], stdin=subdomains.stdout, stdout=file)
-        
-            print('\nFile created successfully in pentesting_files/enumeration/subdomains.txt');
+        subprocess.run(['grep', 'http'], stdin=subdomains.stdout, stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/enumeration/subdomains.txt');
             
-
-        else:
-            
-            print('\nYou need to create the pentshelp folders first')
-
 
 
 def add_host(hostname, ip):
