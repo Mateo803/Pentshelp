@@ -15,16 +15,9 @@ def detect_vulnerabilities(target, output):
         
     else:
 
-        if path.exists('pentesting_files'):
 
+        file = open('pentesting_files/vulnerabilities/cves.txt','w')
 
-            file = open('pentesting_files/vulnerabilities/cves.txt','w')
-
-            vulnerabilities = subprocess.Popen(['nmap', '-sV', '--script','vulners',target], stdout=file)
-        
-            print('\nFile created successfully in pentesting_files/vulnerabilities/cves.txt')
-
-
-        else:
-            
-            print('\nYou need to create the pentshelp folders first')
+        vulnerabilities = subprocess.Popen(['nmap', '-sV', '--script','vulners',target], stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/vulnerabilities/cves.txt')
