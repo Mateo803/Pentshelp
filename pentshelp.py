@@ -1,10 +1,20 @@
-import argparse
-import src.enumeration
-import src.vuln_detection
-import src.exploitation
-import src.postexploitation
-import src.reporting
 
+try:
+
+	import argparse
+	import src.enumeration
+	import src.vuln_detection
+	import src.exploitation
+	import src.postexploitation
+	import src.reporting
+	
+	
+except:
+
+	print('\nThere are dependencies not installed. Please execute install_dependencies.sh first')
+	
+	exit()
+	
 
 def main():
 
@@ -83,7 +93,7 @@ def main():
 
         src.enumeration.add_host(args.add_host[0], args.add_host[1])
 
-    elif args.vulnerabilities is not None: #TODO
+    elif args.vulnerabilities is not None:
 
         src.vuln_detection.detect_vulnerabilities(args.vulnerabilities, args.output)
 
