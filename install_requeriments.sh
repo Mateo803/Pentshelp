@@ -10,4 +10,4 @@ sudo apt-get install gobuster -y;
 
 pip install argparse mysql-connector-python reportlab matplotlib;
 
-echo -e "$(tput setaf 3) \nRequeriments installed succesfully"
+echo "$(tput setaf 3) \nRequeriments installed succesfully"
