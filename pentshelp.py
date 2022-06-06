@@ -1,12 +1,12 @@
-
 try:
 
-	import argparse
-	import src.enumeration
-	import src.vuln_detection
-	import src.exploitation
-	import src.postexploitation
-	import src.reporting
+    import argparse
+    from os import path
+    import src.enumeration
+    import src.vuln_detection
+    import src.exploitation
+    import src.postexploitation
+    import src.reporting
 	
 	
 except:
@@ -14,6 +14,13 @@ except:
 	print('\nThere are dependencies not installed. Please execute install_dependencies.sh first')
 	
 	exit()
+
+
+if not path.exists('pentesting_files'):
+
+    print('\nYou need to create the pentshelp folders first')
+
+    exit()
 	
 
 def main():
