@@ -96,7 +96,7 @@ def report_cve(cve, solution):
 
 	if cve_data == -1:
 
-		print("\nInvalid CVE")
+		print("\nInvalid CVE-ID")
 
 		return
 
@@ -157,9 +157,14 @@ def report_cve(cve, solution):
 
 		print('\nThe CVE has already been reported')
 
-	else:
+	else: #Knowing that the vulnerability has been correctly inserted into the database, now it is possible to insert it into vulnerabilities.txt
 
-		print('\nCVE reported successfully')
+
+		vulnerabilities_file = open('pentesting_files/vulnerabilities/vulnerabilities.txt','a')
+
+		vulnerabilities_file.write('\n'+cve_data["id"]+'\t'+str(cve_data["score"]))
+
+		print('\nCVE reported successfully (inserted into the database and also in pentesting_files/vulnerabilities/vulnerabilities.txt)')
 
 
 
@@ -199,7 +204,26 @@ def delete_cve(cve):
 
 		print('\nThe CVE is not registered')
 
-	else:
+	else: #Knowing that the vulnerability has been correctly deleted from the database, now it is possible to also delete it from the file vulnerabilities.txt
+
+
+		vulnerabilities_before_deletion = open('pentesting_files/vulnerabilities/vulnerabilities.txt','r')
+
+		vulnerabilities_before_deletion_lines = vulnerabilities_before_deletion.readlines()
+
+		vulnerabilities_before_deletion.close()
+
+		vulnerabilities_after_deletion = open('pentesting_files/vulnerabilities/vulnerabilities.txt','w')
+
+		for line in vulnerabilities_before_deletion_lines: #Write all the old lines except which includes the vulnerability to delete
+
+			if (line.find(cve) == -1):
+
+				vulnerabilities_after_deletion.write(line)
+
+
+		vulnerabilities_after_deletion.close()
+
 
 		print('\nCVE deleted successfully')
 
@@ -396,7 +420,7 @@ def generate_report(report_name):
 
 	report.drawImage('summary.png',0,250)
 
-	plot.savefig("summary.png",dpi=300)
+	plot.savefig("pentesting_files/reports/summary.png",dpi=300)
 
 	page = str(report.getPageNumber())
 
