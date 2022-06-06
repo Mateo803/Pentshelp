@@ -105,8 +105,8 @@ def report_cve(cve, solution):
 
 		connection = mysql.connector.connect(
 	  host="localhost",
-	  user="root",
-	  password="root",
+	  user="Pentshelp",
+	  password="strong_password",
 	  database="pentshelp"
 	)
 
@@ -172,8 +172,8 @@ def delete_cve(cve):
 
 		connection = mysql.connector.connect(
 	  host="localhost",
-	  user="root",
-	  password="root",
+	  user="Pentshelp",
+	  password="strong_password",
 	  database="pentshelp"
 	)
 
@@ -213,8 +213,8 @@ def generate_report(report_name):
 
 		connection = mysql.connector.connect(
 	  host="localhost",
-	  user="root",
-	  password="root",
+	  user="Pentshelp",
+	  password="strong_password",
 	  database="pentshelp"
 	)
 
