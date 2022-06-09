@@ -1,21 +1,95 @@
 import subprocess
 
+from os import path
 
-def upload_exploit(repository,user,target):
+def detect_ports(target, output):
+
+                
+        if output is False:
+        
+            print('\nOpened ports:\n')
+
+            open_ports = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
+                    
+            subprocess.run(['grep', 'open'], stdin=open_ports.stdout, stdout=None)
+            
+           
+        else:
+
+    
+            file = open('pentesting_files/enumeration/open_ports.txt','w')
+
+            open_ports = subprocess.Popen(['nmap', '-sV', target], stdout=subprocess.PIPE)
+            
+            subprocess.run(['grep', 'open'], stdin=open_ports.stdout, stdout=file)
+        
+            print('\nFile created successfully in pentesting_files/enumeration/open_ports.txt');
+                
 
 
-	subprocess.run(['git','clone',repository], stdout=None) #Downloading exploit
+def detect_os(target, output):
 
-	exploit = repository[repository.rfind("/")+1:] #Obtaining exploit folder name
+    if output is False:
+            
+            operating_system = subprocess.Popen(['sudo', 'nmap', '-O', target], stdout=subprocess.PIPE)
 
-	subprocess.run(['zip','-rq',exploit+'.zip',exploit],stdout=None) #Compressing exploit in order to send it through spc
+            subprocess.run(['grep', 'OS details'], stdin=operating_system.stdout, stdout=None)
+            
+            
+    else:
 
-	subprocess.run(['sudo','mv',exploit,'pentesting_files/exploits'], stdout=None) #Moving exploit to the exploits folder
+        
+        file = open('pentesting_files/enumeration/os.txt','w')
 
-	subprocess.run(['scp',exploit+'.zip',user+'@'+target+':~'], stdout=None) #Uploading exploit to the target
+        operating_system = subprocess.Popen(['sudo', 'nmap', '-O', target], stdout=subprocess.PIPE)
 
-	subprocess.run(['ssh',user+'@'+target,'unzip','-q',exploit+'.zip'], stdout=None) #Connecting to the target and decompress it
-	
-	subprocess.run(['ssh',user+'@'+target,'rm',exploit+'.zip'], stdout=None) #Remove compressed exploit
+        subprocess.run(['grep', 'OS details'], stdin=operating_system.stdout, stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/enumeration/os.txt');
+            
 
-	subprocess.run(['ssh',user+'@'+target], stdout=None) #Finally connects to the machine
+def detect_directories(target, wordlist, output):
+
+    if output is False:
+
+        subprocess.Popen(['gobuster','dir','-u',target,'-w',wordlist], stdout=None)
+
+
+    else:
+
+       
+        file = open('pentesting_files/enumeration/directories.txt','w')
+
+        directories = subprocess.Popen(['gobuster','dir','-u',target,'-w',wordlist], stdout=None)
+
+        subprocess.run(['grep', 'http'], stdin=directories.stdout, stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/enumeration/directories.txt');
+            
+
+
+def detect_subdomains(target, wordlist, output):
+
+    if output is False:
+
+        subprocess.Popen(['gobuster','dns','-d',target,'-w',wordlist], stdout=None)
+
+
+    else:
+
+        file = open('pentesting_files/enumeration/subdomains.txt','w')
+
+        directories = subprocess.Popen(['gobuster','dir','-d',target,'-w',wordlist], stdout=None)
+
+        subprocess.run(['grep', 'http'], stdin=subdomains.stdout, stdout=file)
+    
+        print('\nFile created successfully in pentesting_files/enumeration/subdomains.txt');
+            
+
+
+def add_host(hostname, ip):
+
+
+        sed_process= "1i" + ip + "    " + hostname 
+
+        subprocess.run(['sudo','sed','-i',sed_process,'/etc/hosts'], stdout=None)
