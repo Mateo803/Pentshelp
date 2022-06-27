@@ -10,6 +10,8 @@ sudo apt-get install nmap -y &&
 
 sudo apt-get install gobuster -y;
 
+sudo apt-get install mysql-server -y;
+
 pip install argparse mysql-connector-python reportlab matplotlib;
 
 echo "$(tput setaf 3) \nRequeriments installed succesfully"
