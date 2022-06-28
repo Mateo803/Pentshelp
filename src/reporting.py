@@ -1,6 +1,8 @@
 import requests
+import subprocess
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
+from reportlab.lib.styles import ParagraphStyle
 import mysql.connector
 import matplotlib.pyplot as plot
 
@@ -286,7 +288,9 @@ def generate_report(report_name):
 
 		subtitle_summary.textOut('Description')
 
-		summary = Paragraph(cve[1][:-1])
+		estilo = ParagraphStyle('estilo')
+
+		summary = Paragraph(cve[1][:-1],estilo)
 
 		summary.wrap(500,50)
 
@@ -298,7 +302,7 @@ def generate_report(report_name):
 
 		subtitle_date.textOut('Date')
 
-		date = Paragraph(str(cve[2]))
+		date = Paragraph(str(cve[2]),estilo)
 
 		date.wrap(500,50)
 
@@ -310,7 +314,7 @@ def generate_report(report_name):
 
 		subtitle_cvss.textOut('CVSS score')
 
-		cvss = Paragraph(str(cve[3]))
+		cvss = Paragraph(str(cve[3]),estilo)
 
 		cvss.wrap(500,50)
 
@@ -326,7 +330,7 @@ def generate_report(report_name):
 
 		cve_text = cve_text.replace('"]',"")
 
-		cwe = Paragraph(cve_text+'.')
+		cwe = Paragraph(cve_text+'.',estilo)
 
 		cwe.wrap(500,50)
 
@@ -419,6 +423,8 @@ def generate_report(report_name):
 	plot.savefig("summary.png")
 
 	report.drawImage('summary.png',0,250)
+
+	subprocess.Popen(['rm', 'summary.png'], stdout=None)
 
 	plot.savefig("pentesting_files/reports/summary.png",dpi=300)
 
